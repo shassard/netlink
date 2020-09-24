@@ -306,6 +306,11 @@ func compareGeneve(t *testing.T, expected, actual *Geneve) {
 		t.Fatalf("Geneve.ID doesn't match: %d %d", actual.ID, expected.ID)
 	}
 
+	// set the Dport to 6081 (the linux default) if it wasn't specified at creation
+	if expected.Dport == 0 {
+		expected.Dport = 6081
+	}
+
 	if actual.Dport != expected.Dport {
 		t.Fatal("Geneve.Dport doesn't match")
 	}
